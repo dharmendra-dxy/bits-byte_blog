@@ -36,7 +36,7 @@ const LeftSidebar = ()=> {
             </SheetContent>
         </Sheet>
 
-        <div className="hidden lg:block h-screen w-[250px] border-r">
+        <div className="hidden lg:block h-screen w-[250px] border-r dark:border-gray-600">
             <DashboardSidebar/>
         </div>
     </div>
@@ -49,10 +49,10 @@ const DashboardSidebar = () => {
 
     const sidebarLinks = [
         {name: 'Overview', href: '/dashboard', icon:<LayoutDashboard/> },
-        {name: 'Articles', href: '/articles', icon:<FileText/> },
+        {name: 'Articles', href: '/dashboard/articles/create', icon:<FileText/> },
         {name: 'Comments', href: '/comments', icon:<MessageCircle/> },
-        {name: 'Analytics', href: '/comments', icon:<BarChart/> },
-        {name: 'Setting', href: '/comments', icon:<Settings/> },
+        {name: 'Analytics', href: '/analytics', icon:<BarChart/> },
+        {name: 'Setting', href: '/setting', icon:<Settings/> },
     ]
 
     return (

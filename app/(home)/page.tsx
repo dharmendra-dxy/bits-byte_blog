@@ -10,7 +10,6 @@ import Link from "next/link";
 export default function Home() {
   return (
     <main> 
-      <Navbar/>
       <HeroSection/>
 
       <section className="relative py-16 md:py-24">
