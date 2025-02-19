@@ -7,6 +7,7 @@ import SearchInput from "./SearchInput";
 import { useState } from "react";
 import { Menu, Search, X } from "lucide-react"
 import { Input } from "@/components/ui/input";
+import { SignedIn, SignedOut, SignInButton, SignUpButton, UserButton } from "@clerk/nextjs";
 
 const Navbar = () => {
   const [isMobileNav, setIsMobileNav] = useState(false);
@@ -56,10 +57,24 @@ const Navbar = () => {
                 <ToggleMode />
             </div>
 
-            <div className="hidden lg:flex items-center gap-4">
-              <Button>Login</Button>
-              <Button>Signup</Button>
-            </div>
+            {/* user action for authentication" */}
+            <SignedIn>
+              <UserButton/>
+            </SignedIn>
+
+            <SignedOut>
+              <div className="hidden lg:flex items-center gap-4">
+                <SignInButton>
+                  <Button variant='outline'>Login</Button>
+                </SignInButton>
+
+                <SignUpButton>
+                  <Button >Signup</Button>
+                </SignUpButton>
+              </div>
+            </SignedOut>
+
+            
           </div>
 
           {/* mobile Nav */}
@@ -114,18 +129,18 @@ const Navbar = () => {
           </div>
 
           {/* Mobile Auth Buttons */}
-          {/* <SignedOut>
+          {/* <SignedOut> */}
                 <div className="px-4 flex flex-col gap-2">
-                    <SignInButton>
+                    {/* <SignInButton> */}
                     <Button variant="outline" className="w-full">
                         Login
                     </Button>
-                    </SignInButton>
-                    <SignUpButton>
+                    {/* </SignInButton> */}
+                    {/* <SignUpButton> */}
                     <Button className="w-full">Sign up</Button>
-                    </SignUpButton>
+                    {/* </SignUpButton> */}
                 </div>
-            </SignedOut> */}
+            {/* </SignedOut> */}
         </div>
       )}
     </nav>
