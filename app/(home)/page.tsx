@@ -7,9 +7,9 @@ import { Button } from "@/components/ui/button";
 import Link from "next/link";
 
 
-export default function Home() {``
+export default function Home() {
   return (
-    <div> 
+    <main> 
       <Navbar/>
       <HeroSection/>
 
@@ -17,7 +17,7 @@ export default function Home() {``
         <div className="conatiner mx-auto px-4 sm:px-6 lg:px-8 flex flex-col">
 
           <div className="mb-12 text-center"> 
-            <h2 className="text-3xl font-bold tracking-tight text-gray-900 dark:text-white"> 
+            <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-gray-900 dark:text-white"> 
               Featured Articles
             </h2>
             <p className="mt-4 text-gray-600 dark:text-gray-400">DIscover our most popular and trending content</p>
@@ -27,7 +27,7 @@ export default function Home() {``
             <TopArticlesSection/>
           </div>
 
-          <div className="mt-10 text-center">
+          <div className="mt-12 text-center">
             <Link href='/artilces'>
               <Button className="hover:bg-white hover:text-black hover:border dark:hover:bg-black dark:hover:text-white"> 
                 View All Articles
@@ -42,6 +42,6 @@ export default function Home() {``
 
       <Footer/>
       
-    </div>
+    </main>
   );
 }
