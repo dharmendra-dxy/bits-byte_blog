@@ -70,7 +70,7 @@ export const editArticle = async (articleId:string, prevState:editArticlesFormSt
     if(!existingUser || existingUser.id !== exisitingArticle?.authorId ){
         return {
             errors: {
-                formErrors: ['User not found. Please register before creating an article'],
+                formErrors: ['You are not the Author of this article'],
             }
         }
     }
