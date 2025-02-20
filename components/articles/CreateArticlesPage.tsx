@@ -93,7 +93,7 @@ const CreateArticlesPage = () => {
                         <Button variant='outline'>Cancel</Button>
                         <Button type='submit' disabled={isPending}>
                             {
-                                isPending ? "Loading..." : "Publish"
+                                isPending ? "Publishing..." : "Publish"
                             }
                         </Button>
                     </div>
