@@ -4,16 +4,56 @@ import Link from 'next/link'
 import { FileText, MessageCircle, PlusCircle, Star } from 'lucide-react'
 import { Card, CardContent, CardHeader, CardTitle } from '../ui/card'
 import RecentArticles from './RecentArticles'
+import { prisma } from '@/lib/prisma'
 
-const BlogDashboard = () => {
+const BlogDashboard = async() => {
+
+    // get data from database:
+    const [articles, totalComments] = await Promise.all([
+        
+        // articles:
+        prisma.articles.findMany({
+            orderBy: {
+                createdAt: 'desc',
+            },
+            include:{
+                comments: true,
+                author: {
+                    select: {
+                        name: true,
+                        email: true,
+                        imageUrl: true,
+                    }
+                }
+            }
+        }),
+
+        // total comment count:
+        prisma.comment.count(),
+    ]);
 
     const cardDetails = [
-        {title:'Total Articles', icon: <FileText className='h-4 w-4'/>,content: "2", message: "+5 from last month"},
-        {title:'Total Comments', icon: <MessageCircle className='h-4 w-4'/>,content: "3", message: "+12 awaiting moderation"},
-        {title:'Avg. Rating', icon: <Star className='h-4 w-4'/>,content: "4.2", message: "+0.06 from last months"},
+        {
+            title:'Total Articles', 
+            icon: <FileText className='h-4 w-4'/>,
+            content: articles.length, 
+            message: "+5 from last month"
+        },
+        {
+            title:'Total Comments', 
+            icon: <MessageCircle className='h-4 w-4'/>,
+            content: totalComments, 
+            message: "+12 awaiting moderation"
+        },
+        {
+            title:'Avg. Rating', 
+            icon: <Star className='h-4 w-4'/>,
+            content: "4.2", 
+            message: "+0.06 from last months"
+        },
     ]
 
-
+    
   return (
     <main className='flex-1 py-6 px-10 w-full'>
 
@@ -56,7 +96,9 @@ const BlogDashboard = () => {
         </div>
 
         {/* recent Article: dispaly all the articles here */}
-        <RecentArticles/>
+        <RecentArticles
+        articles={articles}
+        />
 
     </main>
   )

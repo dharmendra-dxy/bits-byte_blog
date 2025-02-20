@@ -5,8 +5,24 @@ import {MoveRight, SquarePen, Trash2} from 'lucide-react'
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '../ui/table'
 import Link from 'next/link'
 import { Badge } from '../ui/badge'
+import { Prisma } from '@prisma/client'
 
-const RecentArticles = () => {
+type recentArticleProps = {
+    articles:Prisma.ArticlesGetPayload<{
+        include: {
+            comments: true,
+            author:{
+                select:{
+                    name: true,
+                    email: true,
+                    imageUrl: true,
+                },
+            },
+        }
+    }>[]
+}
+
+const RecentArticles: React.FC<recentArticleProps> = ({articles}) => {
   return (
     <Card className='mb-8 mt-8'>
         <CardHeader>
@@ -21,42 +37,62 @@ const RecentArticles = () => {
             </div>
         </CardHeader>
 
-        <CardContent>
-            <Table>
-                <TableHeader>
-                    <TableRow>
-                        <TableHead>Title</TableHead>
-                        <TableHead>Status</TableHead>
-                        <TableHead>Comments</TableHead>
-                        <TableHead>Date</TableHead>
-                        <TableHead>Actions</TableHead>
-                    </TableRow>
-                </TableHeader>
+        {
+            !articles.length ? ( 
+                <CardContent>
+                    No Articles Found
+                </CardContent>
+            ) : 
+            (
+                <CardContent>
+                    <Table>
+                        <TableHeader>
+                            <TableRow>
+                                <TableHead>Title</TableHead>
+                                <TableHead>Status</TableHead>
+                                <TableHead>Comments</TableHead>
+                                <TableHead>Date</TableHead>
+                                <TableHead>Actions</TableHead>
+                            </TableRow>
+                        </TableHeader>
 
-                <TableBody>
-                    <TableRow>
-                        <TableCell> Way to earn money- 50 hit and trail methods</TableCell>
-                        <TableCell>
-                            <Badge variant="secondary"
-                            className='bg-green-500 text-black'
-                            >Published</Badge>
-                        </TableCell>
-                        <TableCell>2</TableCell>
-                        <TableCell>14 February 2025</TableCell>
-                        <TableCell>
-                            <div className='flex gap-2'>
-                                <Link href={`/dashboard/articles/${123}/edit`}>
-                                <Button size='sm' variant='outline'><SquarePen/>Edit</Button>
-                                </Link>
-                                <Link href={`/dashboard/articles/${123}/delete`}>
-                                <Button size='sm' variant='outline'><Trash2/>Delete</Button>
-                                </Link>
-                            </div>
-                        </TableCell>
-                    </TableRow>
-                </TableBody>
-            </Table>
-        </CardContent>
+                        <TableBody>
+                        {
+                            articles.map((article)=>(
+                            <TableRow key={article.id}>
+
+                                <TableCell>{article.title}</TableCell>
+
+                                <TableCell>
+                                    <Badge variant="secondary"
+                                    className='bg-green-500 text-black'
+                                    >Published</Badge>
+                                </TableCell>
+
+                                <TableCell>{article.comments.length}</TableCell>
+
+                                <TableCell>{article.createdAt.toDateString()}</TableCell>
+
+                                <TableCell>
+                                    <div className='flex gap-2'>
+                                        <Link href={`/dashboard/articles/${article.id}/edit`}>
+                                        <Button size='sm' variant='outline'><SquarePen/>Edit</Button>
+                                        </Link>
+                                        <Link href={`/dashboard/articles/${article.id}/delete`}>
+                                        <Button size='sm' variant='outline'><Trash2/>Delete</Button>
+                                        </Link>
+                                    </div>
+                                </TableCell>
+
+                            </TableRow>
+                                
+                            ))
+                        }
+                        </TableBody>
+                    </Table>
+                </CardContent>
+            )
+        }
 
     </Card>
   )
