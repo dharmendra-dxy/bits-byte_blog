@@ -7,9 +7,9 @@ import { Label } from '../ui/label'
 import dynamic from 'next/dynamic'
 import { Button } from '../ui/button'
 import 'react-quill-new/dist/quill.snow.css';
-import { createArticle } from '@/actions/createArticle'
-import Link from 'next/link'
 import { Articles } from '@prisma/client'
+import { editArticle } from '@/actions/editArticle'
+import Link from 'next/link'
 import Image from 'next/image'
 
 const ReactQuill = dynamic(()=> import('react-quill-new'), {ssr: false});
@@ -23,7 +23,8 @@ const EditArticlePage:React.FC<EditArticleProps> = ({article}) => {
     const [content, setContent] = useState(article.content);
 
     // server side calling:
-    const [formState, action, isPending] = useActionState(createArticle, {errors: {}});
+    const [formState, action, isPending] = 
+    useActionState(editArticle.bind(null, article.id), {errors: {}});
 
     const handleSubmit = async(e: FormEvent<HTMLFormElement>)=>{
         e.preventDefault();
@@ -91,6 +92,12 @@ const EditArticlePage:React.FC<EditArticleProps> = ({article}) => {
                         name='featuredImage'
                         accept='image/*'
                         />
+                        {
+                            formState.errors.featuredImage && 
+                            <span className='text-red-600 text-sm mt'>
+                                {formState.errors.featuredImage}
+                            </span>
+                        }
                         <div className=''>
                             {
                                 article.featuredImage && <Image 
@@ -102,6 +109,7 @@ const EditArticlePage:React.FC<EditArticleProps> = ({article}) => {
                             />
                             } 
                         </div>
+                        
                         
                     </div>
                     <div className='space-y-2'>
