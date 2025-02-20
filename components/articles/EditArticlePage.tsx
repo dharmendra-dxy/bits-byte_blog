@@ -8,14 +8,19 @@ import dynamic from 'next/dynamic'
 import { Button } from '../ui/button'
 import 'react-quill-new/dist/quill.snow.css';
 import { createArticle } from '@/actions/createArticle'
-import { redirect } from 'next/navigation'
 import Link from 'next/link'
+import { Articles } from '@prisma/client'
+import Image from 'next/image'
 
 const ReactQuill = dynamic(()=> import('react-quill-new'), {ssr: false});
 
-const CreateArticlesPage = () => {
+type EditArticleProps = {
+    article: Articles;
+}
 
-    const [content, setContent] = useState("");
+const EditArticlePage:React.FC<EditArticleProps> = ({article}) => {
+
+    const [content, setContent] = useState(article.content);
 
     // server side calling:
     const [formState, action, isPending] = useActionState(createArticle, {errors: {}});
@@ -30,19 +35,19 @@ const CreateArticlesPage = () => {
         })
     }
 
-
   return (
     <div className='max-w-4xl mx-auto p-6'>
         <Card>
             <CardHeader>
-                <CardTitle>Create New Articles</CardTitle>
+                <CardTitle>Edit Article</CardTitle>
             </CardHeader>
             <CardContent>
                 <form className='space-y-6' onSubmit={handleSubmit}>
                     <div className='space-y-2'>
                         <Input
                          type='text'
-                         name='title'   
+                         name='title'
+                         defaultValue={article.title}   
                          placeholder='Enter the article title'
                         />
                         {
@@ -58,6 +63,7 @@ const CreateArticlesPage = () => {
                         className='flex h-10 w-full rounded-md border py-2' 
                         name='category'
                         id='category'
+                        defaultValue={article.category}
                         >
                             <option value=''>Select category</option>
                             <option value='programming'>Programming</option>
@@ -85,6 +91,18 @@ const CreateArticlesPage = () => {
                         name='featuredImage'
                         accept='image/*'
                         />
+                        <div className=''>
+                            {
+                                article.featuredImage && <Image 
+                                src={article.featuredImage}
+                                alt='featuredImage'
+                                height={300}
+                                width={300}
+                                className='rounded-md shadow-lg shadow-slate-400'
+                            />
+                            } 
+                        </div>
+                        
                     </div>
                     <div className='space-y-2'>
                         <Label>Content</Label>
@@ -109,7 +127,7 @@ const CreateArticlesPage = () => {
                         </Link>
                         <Button type='submit' disabled={isPending}>
                             {
-                                isPending ? "Publishing..." : "Publish"
+                                isPending ? "Editing..." : "Edit Article"
                             }
                         </Button>
                     </div>
@@ -120,4 +138,4 @@ const CreateArticlesPage = () => {
   )
 }
 
-export default CreateArticlesPage
+export default EditArticlePage

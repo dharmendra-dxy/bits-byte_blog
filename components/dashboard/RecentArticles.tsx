@@ -93,7 +93,7 @@ const RecentArticles: React.FC<recentArticleProps> = ({articles}) => {
                 </CardContent>
             )
         }
-
+    
     </Card>
   )
 }
