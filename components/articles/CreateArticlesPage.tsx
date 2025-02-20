@@ -45,7 +45,9 @@ const CreateArticlesPage = () => {
                         />
                         {
                             formState.errors.title && 
-                            <span className='text-red-600 text-sm'>{formState.errors.title}</span>
+                            <span className='text-red-600 text-sm'>
+                                {formState.errors.title}
+                            </span>
                         }
                     </div>
                     <div className='space-y-2'>
@@ -68,7 +70,9 @@ const CreateArticlesPage = () => {
                         </select>
                         {
                             formState.errors.category && 
-                            <span className='text-red-600 text-sm'>{formState.errors.category}</span>
+                            <span className='text-red-600 text-sm'>
+                                {formState.errors.category}
+                            </span>
                         }
                     </div>
                     <div className='space-y-2'>
@@ -85,7 +89,15 @@ const CreateArticlesPage = () => {
                         <ReactQuill theme='snow' value={content} onChange={setContent}/>
                         {
                             formState.errors.content && 
-                            <span className='text-red-600 text-sm'>{formState.errors.content}</span>
+                            <span className='text-red-600 text-sm'>
+                                {formState.errors.content}
+                            </span>
+                        }
+                        {
+                            formState.errors.formErrors && 
+                            <span className='text-red-600 text-sm'>
+                                {formState.errors.formErrors}
+                            </span>
                         }
                     </div>
                     
