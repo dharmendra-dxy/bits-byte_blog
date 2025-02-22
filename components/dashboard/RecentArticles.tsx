@@ -1,3 +1,5 @@
+"use client"
+
 import React from 'react'
 import { Card, CardContent, CardHeader, CardTitle } from '../ui/card'
 import { Button } from '../ui/button'
@@ -6,13 +8,14 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '.
 import Link from 'next/link'
 import { Badge } from '../ui/badge'
 import { Prisma } from '@prisma/client'
+import { useFormStatus } from 'react-dom'
 
 type recentArticleProps = {
     articles:Prisma.ArticlesGetPayload<{
         include: {
             comments: true,
             author:{
-                select:{
+                select:{    
                     name: true,
                     email: true,
                     imageUrl: true,
@@ -78,9 +81,7 @@ const RecentArticles: React.FC<recentArticleProps> = ({articles}) => {
                                         <Link href={`/dashboard/articles/${article.id}/edit`}>
                                         <Button size='sm' variant='outline'><SquarePen/>Edit</Button>
                                         </Link>
-                                        <Link href={`/dashboard/articles/${article.id}/delete`}>
-                                        <Button size='sm' variant='outline'><Trash2/>Delete</Button>
-                                        </Link>
+                                        <DeleteButton articleId = {article.id}/>
                                     </div>
                                 </TableCell>
 
@@ -99,4 +100,23 @@ const RecentArticles: React.FC<recentArticleProps> = ({articles}) => {
 }
 
 export default RecentArticles;
+
+type deleteButtomProp = {
+    articleId: string
+}
+
+const DeleteButton:React.FC<deleteButtomProp> = ({articleId}) => {
+    const { pending } = useFormStatus();
+
+    return (
+        <form>
+            <Button size='sm' variant='outline'>
+                <Trash2/>{ pending ? "Deleting..." : "Delete"}
+            </Button>
+        </form>
+    )
+    
+    
+}
+
 

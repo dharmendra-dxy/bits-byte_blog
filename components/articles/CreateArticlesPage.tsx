@@ -8,7 +8,6 @@ import dynamic from 'next/dynamic'
 import { Button } from '../ui/button'
 import 'react-quill-new/dist/quill.snow.css';
 import { createArticle } from '@/actions/createArticle'
-import { redirect } from 'next/navigation'
 import Link from 'next/link'
 
 const ReactQuill = dynamic(()=> import('react-quill-new'), {ssr: false});
