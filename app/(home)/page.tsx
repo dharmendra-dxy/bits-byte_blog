@@ -5,6 +5,7 @@ import HeroSection from "@/components/home/HeroSection";
 import TopArticlesSection from "@/components/home/TopArticlesSection";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
+import { Suspense } from "react";
 
 
 export default function Home() {
@@ -23,11 +24,13 @@ export default function Home() {
           </div>
 
           <div>
+            <Suspense fallback={<h1>Loading Article</h1>}>
             <TopArticlesSection/>
+            </Suspense>
           </div>
 
           <div className="mt-12 text-center">
-            <Link href='/artilces'>
+            <Link href='/articles'>
               <Button className="hover:bg-white hover:text-black hover:border dark:hover:bg-black dark:hover:text-white"> 
                 View All Articles
               </Button>
