@@ -26,7 +26,7 @@ const AllArticlesSection = () => {
 
                 <div className='mt-6 flex items-center justify-between'>
                     <div className='flex items-center gap-3 '>
-                        <Avatar className='bg-gray-200 dark:bg-gray-700 h-9 w-9 flex items-center justify-center'>
+                        <Avatar className='bg-gray-200 dark:bg-gray-700 h-9 w-9 flex items-center justify-center cursor-pointer'>
                             <AvatarImage src=""/>
                             <AvatarFallback>CN</AvatarFallback>
                         </Avatar>
