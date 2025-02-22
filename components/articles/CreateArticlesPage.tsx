@@ -84,6 +84,12 @@ const CreateArticlesPage = () => {
                         name='featuredImage'
                         accept='image/*'
                         />
+                        {
+                            formState.errors.featuredImage && 
+                            <span className='text-red-600 text-sm mt'>
+                                {formState.errors.featuredImage}
+                            </span>
+                        }
                     </div>
                     <div className='space-y-2'>
                         <Label>Content</Label>
