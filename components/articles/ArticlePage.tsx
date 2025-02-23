@@ -3,8 +3,11 @@ import { Avatar, AvatarFallback } from '@radix-ui/react-avatar'
 import React from 'react'
 import { AvatarImage } from '../ui/avatar'
 import Image from 'next/image'
+import LikeArticleButton from './LikeArticleButton'
+import ArticleCommentSection from '../comments/ArticleCommentSection'
+import ArticleCommentInput from '../comments/ArticleCommentInput'
 
-type articlePageTypes = {
+type articlePageTypes ={
     article : Prisma.ArticlesGetPayload<{
         include: {
             author:{
@@ -69,12 +72,19 @@ const ArticlePage:React.FC<articlePageTypes> = ({article}) => {
 
                 {/* article content: */}
                 <section 
-                className='mb-12 max-w-none border-b border-gray-500 pb-4'
+                className='mb-6 max-w-none border-b border-gray-500 pb-4'
                 dangerouslySetInnerHTML={{__html:article.content}}
                 >
                 </section>
 
                 {/* Like button: */}
+                <LikeArticleButton />
+                
+                {/* comment Input  */}
+                <ArticleCommentInput />
+ 
+                {/* comment section: */}
+                <ArticleCommentSection />
 
             </article>
 
