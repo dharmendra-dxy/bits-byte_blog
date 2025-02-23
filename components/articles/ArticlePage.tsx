@@ -7,6 +7,7 @@ import LikeArticleButton from './LikeArticleButton'
 import ArticleCommentSection from '../comments/ArticleCommentSection'
 import ArticleCommentInput from '../comments/ArticleCommentInput'
 import { prisma } from '@/lib/prisma'
+import { auth } from '@clerk/nextjs/server'
 
 type articlePageTypes ={
     article : Prisma.ArticlesGetPayload<{
@@ -37,6 +38,20 @@ const ArticlePage:React.FC<articlePageTypes> = async ({article}) => {
             }
         }
     });
+
+    // get likes:
+    const likes= await prisma.like.findMany({
+        where: {articleId: article.id}
+    });
+
+    const {userId} = await auth();
+
+    const user = await prisma.user.findUnique({
+        where: {clerkUserId: userId as string},
+    });
+
+    // check if user has already liked the posts or not:
+    const isLiked:boolean = likes.some((like) => like.authorId===user?.id);
 
 
   return (
@@ -94,7 +109,11 @@ const ArticlePage:React.FC<articlePageTypes> = async ({article}) => {
                 </section>
 
                 {/* Like button: */}
-                <LikeArticleButton />
+                <LikeArticleButton  
+                articleId={article.id}
+                likes={likes}
+                isLiked={isLiked}
+                />
                 
                 {/* comment Input  */}
                 <ArticleCommentInput articleId={article.id}/>
