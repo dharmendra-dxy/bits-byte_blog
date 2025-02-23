@@ -81,7 +81,7 @@ const ArticlePage:React.FC<articlePageTypes> = ({article}) => {
                 <LikeArticleButton />
                 
                 {/* comment Input  */}
-                <ArticleCommentInput />
+                <ArticleCommentInput articleId={article.id}/>
  
                 {/* comment section: */}
                 <ArticleCommentSection />
