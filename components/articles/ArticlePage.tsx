@@ -6,6 +6,7 @@ import Image from 'next/image'
 import LikeArticleButton from './LikeArticleButton'
 import ArticleCommentSection from '../comments/ArticleCommentSection'
 import ArticleCommentInput from '../comments/ArticleCommentInput'
+import { prisma } from '@/lib/prisma'
 
 type articlePageTypes ={
     article : Prisma.ArticlesGetPayload<{
@@ -21,8 +22,23 @@ type articlePageTypes ={
     }>
 }
 
-const ArticlePage:React.FC<articlePageTypes> = ({article}) => {
-    
+const ArticlePage:React.FC<articlePageTypes> = async ({article}) => {
+
+    // load all comments for a article:
+    const comments = await prisma.comment.findMany({
+        where: {articleId: article.id},
+        include: {
+            author:{
+                select:{
+                    name: true,
+                    email:true,
+                    imageUrl: true,
+                }
+            }
+        }
+    });
+
+
   return (
     <div className='min-h-screen bg-background'>
         <main className='container mx-auto py-12 px-4 sm:px-8 lg:px-8'>
@@ -84,7 +100,7 @@ const ArticlePage:React.FC<articlePageTypes> = ({article}) => {
                 <ArticleCommentInput articleId={article.id}/>
  
                 {/* comment section: */}
-                <ArticleCommentSection />
+                <ArticleCommentSection  comments = {comments}/>
 
             </article>
 

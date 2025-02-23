@@ -34,9 +34,9 @@ const ArticleCommentInput: React.FC<commentInputProps> = ({articleId}) => {
                 />
                 
                 <div>
-                    <Button type='submit'>{
-                        isPending ? "Adding..." : "Add Comment"
-                    }</Button>
+                    <Button type='submit' disabled={isPending}>
+                        {isPending ? "Adding..." : "Add Comment"}
+                    </Button>
                 </div>
                 
             </div>
