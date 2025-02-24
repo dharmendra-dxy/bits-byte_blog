@@ -28,7 +28,7 @@ const TopArticlesSection = async () => {
 
   return (
     <div
-    className='grid gap-8 sm:grid-cols-2 lg:grid-cols-3'
+    className='grid gap-8 sm:grid-cols-2 lg:grid-cols-3 container px-4 sm:px-6 lg:px-8 mx-auto'
     >
         {
             articles.slice(0,3).map((article) => (

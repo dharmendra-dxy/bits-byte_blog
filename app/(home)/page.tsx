@@ -1,11 +1,11 @@
 
 import { Footer } from "@/components/home/Footer";
-import Navbar from "@/components/home/header/Navbar";
 import HeroSection from "@/components/home/HeroSection";
 import TopArticlesSection from "@/components/home/TopArticlesSection";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { Suspense } from "react";
+import { AllArticlesSectionSkeleton } from "../articles/page";
 
 
 export default function Home() {
@@ -24,7 +24,7 @@ export default function Home() {
           </div>
 
           <div>
-            <Suspense fallback={<h1>Loading Article</h1>}>
+            <Suspense fallback={<AllArticlesSectionSkeleton/>}>
             <TopArticlesSection/>
             </Suspense>
           </div>

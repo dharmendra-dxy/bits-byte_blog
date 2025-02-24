@@ -65,6 +65,7 @@ const EditArticlePage:React.FC<EditArticleProps> = ({article}) => {
                         name='category'
                         id='category'
                         defaultValue={article.category}
+                        required
                         >
                             <option value=''>Select category</option>
                             <option value='Programming'>Programming</option>
@@ -76,7 +77,7 @@ const EditArticlePage:React.FC<EditArticleProps> = ({article}) => {
                             <option value='Socialmedia'>Social Media</option>
                             <option value='History'>History</option>
                             <option value='Friction'>Friction</option>
-                            <option value='Nonfriction'>Nonfriction</option>
+                            <option value='Education'>Education</option>
                             <option value='Others'>Others</option>
                         </select>
                         {

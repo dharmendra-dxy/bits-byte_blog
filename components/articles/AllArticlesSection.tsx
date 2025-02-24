@@ -24,9 +24,8 @@ const AllArticlesSection:React.FC<AllArticlesSectionProps> = async ({searchText}
     <div className='grid gap-8 sm:grid-cols-2 lg:grid-cols-3'>
         {
             articles.map((article) => (
-            <Link href={`/articles/${article.id}`}>
+            <Link href={`/articles/${article.id}`} key={article.id}>
                 <Card
-                key={article.id}
                 className='group relative overflow-hidden translate-all hover:scale-[1.02] transition-all border border-gray-400 dark:border-gray-700'
                 >
                 <div className='p-6 '>

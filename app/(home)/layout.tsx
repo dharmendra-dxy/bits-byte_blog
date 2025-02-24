@@ -10,7 +10,12 @@ const layout = async({children} : {children: React.ReactNode}) => {
     const user = await currentUser();
 
     if(!user){ 
-        return null;
+        return(
+            <div>
+                <Navbar/>
+                {children}
+            </div>
+        );
     }
 
     const loggedInUser = await prisma.user.findUnique({

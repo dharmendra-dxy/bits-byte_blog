@@ -24,7 +24,6 @@ const Navbar = () => {
         <div className="flex h-16 items-center justify-between">
 
           {/* left portion: */}
-
           <div className="flex items-center gap-8">
             <Link href="/">
               <span className="font-bold text-2xl">
@@ -37,7 +36,6 @@ const Navbar = () => {
           </div>
 
           {/* desktop view: only for desktop*/}
-
           <div className="hidden lg:flex items-center gap-4">
             {navLinks.map((item) => (
               <Link
@@ -58,9 +56,11 @@ const Navbar = () => {
             </div>
 
             {/* user action for authentication" */}
+            <div className="hidden lg:flex">
             <SignedIn>
               <UserButton/>
             </SignedIn>
+            </div>
 
             <SignedOut>
               <div className="hidden lg:flex items-center gap-4">
@@ -76,22 +76,35 @@ const Navbar = () => {
 
             
           </div>
-
+          
           {/* mobile Nav */}
-          <Button
-            variant="ghost"
-            size="icon"
-            className="lg:hidden text-muted-foreground hover:text-foreground"
-            onClick={() => setIsMobileNav((prev) => !prev)}
-          >
-            {isMobileNav ? (
-              <X className="h-5 w-5" />
-            ) : (
-              <Menu className="h-5 w-5" />
-            )}
-          </Button>
+          <div className="flex items-center justify-between lg:hidden">
+
+            <div className="lg:hidden">
+              <SignedIn>
+                <UserButton/>
+              </SignedIn>
+            </div>
+          
+            <Button
+              variant="ghost"
+              size="icon"
+              className="lg:hidden text-muted-foreground hover:text-foreground"
+              onClick={() => setIsMobileNav((prev) => !prev)}
+            >
+              
+
+              {isMobileNav ? (
+                <X className="h-5 w-5" />
+              ) : (
+                <Menu className="h-5 w-5" />
+              )}
+            </Button>
+          </div>
+
         </div>
       </div>
+
 
       {/* mobile menu when isMobileNav*/}
       {isMobileNav && (
@@ -129,18 +142,18 @@ const Navbar = () => {
           </div>
 
           {/* Mobile Auth Buttons */}
-          {/* <SignedOut> */}
+          <SignedOut>
                 <div className="px-4 flex flex-col gap-2">
-                    {/* <SignInButton> */}
+                    <SignInButton>
                     <Button variant="outline" className="w-full">
                         Login
                     </Button>
-                    {/* </SignInButton> */}
-                    {/* <SignUpButton> */}
+                    </SignInButton>
+                    <SignUpButton>
                     <Button className="w-full">Sign up</Button>
-                    {/* </SignUpButton> */}
+                    </SignUpButton>
                 </div>
-            {/* </SignedOut> */}
+            </SignedOut>
         </div>
       )}
     </nav>
