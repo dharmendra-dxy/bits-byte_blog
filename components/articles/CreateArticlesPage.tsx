@@ -59,15 +59,17 @@ const CreateArticlesPage = () => {
                         id='category'
                         >
                             <option value=''>Select category</option>
-                            <option value='programming'>Programming</option>
-                            <option value='technology'>Technology</option>
-                            <option value='cooking'>Cooking</option>
-                            <option value='automobiles'>Automobiles</option>
-                            <option value='entertainment'>Entertainment</option>
-                            <option value='indianpolitics'>Indian Politics</option>
-                            <option value='socialmedia'>Social Media</option>
-                            <option value='education'>Education</option>
-                            <option value='others'>Others</option>
+                            <option value='Programming'>Programming</option>
+                            <option value='Technology'>Technology</option>
+                            <option value='Cooking'>Cooking</option>
+                            <option value='Automobiles'>Automobiles</option>
+                            <option value='Entertainment'>Entertainment</option>
+                            <option value='Indianpolitics'>Indian Politics</option>
+                            <option value='Socialmedia'>Social Media</option>
+                            <option value='History'>History</option>
+                            <option value='Friction'>Friction</option>
+                            <option value='Nonfriction'>Nonfriction</option>
+                            <option value='Others'>Others</option>
                         </select>
                         {
                             formState.errors.category && 
