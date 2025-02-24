@@ -1,10 +1,18 @@
+
+
 import AllArticlesSection from '@/components/articles/AllArticlesSection'
 import ArticleSearchInput from '@/components/articles/ArticleSearchInput'
 import { Button } from '@/components/ui/button'
 import { MoveLeft, MoveRight } from 'lucide-react'
 import React from 'react'
 
-const page = () => {
+type searchPageProps = {
+  searchParams: Promise<{search?:string }>
+}
+
+const page: React.FC<searchPageProps> = async ({searchParams}) => {
+  const searchText = (await searchParams).search || "";
+
   return (
     <main className='min-h-screen bg-background'>
         <div className='container mx-auto px-4 sm:px-6 lg:px-8'>
@@ -18,7 +26,7 @@ const page = () => {
             </div>
 
             {/* Display all articles here: */}
-            <AllArticlesSection/>
+            <AllArticlesSection searchText={searchText}/>
 
 
             {/* Pagination  */}
