@@ -21,7 +21,6 @@ const LeftSidebar = ()=> {
 
     const [isSidebarOpen,setIsSidebarOpen] = useState(false);
 
-
   return (
     <div>
         <Sheet>
@@ -50,9 +49,9 @@ const DashboardSidebar = () => {
     const sidebarLinks = [
         {name: 'Overview', href: '/dashboard', icon:<LayoutDashboard/> },
         {name: 'Articles', href: '/dashboard/articles/create', icon:<FileText/> },
-        {name: 'Comments', href: '/comments', icon:<MessageCircle/> },
-        {name: 'Analytics', href: '/analytics', icon:<BarChart/> },
-        {name: 'Setting', href: '/setting', icon:<Settings/> },
+        {name: 'Comments', href: '/dashboard/comments', icon:<MessageCircle/> },
+        {name: 'Analytics', href: '/dashboard/analytics', icon:<BarChart/> },
+        {name: 'Setting', href: '/dashboard/setting', icon:<Settings/> },
     ]
 
     return (
