@@ -110,15 +110,8 @@ const Navbar = () => {
       {isMobileNav && (
         <div className="lg:hidden py-4 space-y-4 border-t">
           {/* Search Bar (Mobile) */}
-          <div className="px-4">
-            <div className="relative">
-              <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
-                <Input
-                type="search"
-                placeholder="Search articles..."
-                className="pl-10 w-full focus-visible:ring-1"
-                />
-            </div>
+          <div className="px-4 w-full">
+            <SearchInput />
             <div className="mt-2">
                 <ToggleMode />
             </div>
