@@ -16,7 +16,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Byte Code",
+  title: "Bits & Bytes",
   description: "Blogs, where developer talk",
 };
 

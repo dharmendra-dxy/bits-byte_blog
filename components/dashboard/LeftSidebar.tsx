@@ -59,8 +59,13 @@ const DashboardSidebar = () => {
     <div className="h-full px-4 py-6">
 
         <div className="flex items-center gap-2 mb-8 px-2">
-            <Link href='/'>
-                <span className="text-xl font-bold">ByteCode</span>
+            <Link href="/">
+              <span className="font-bold text-2xl">
+                <span className="bg-gradient-to-r from-purple-600 to-indigo-600 dark:from-purple-400 dark:to-indigo-400 bg-clip-text text-transparent">
+                  Bits
+                </span>
+                <span>&Byte</span>
+              </span>
             </Link>
         </div>
         

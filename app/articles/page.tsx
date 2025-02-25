@@ -5,15 +5,30 @@ import ArticleSearchInput from '@/components/articles/ArticleSearchInput'
 import { Button } from '@/components/ui/button'
 import { Card } from '@/components/ui/card'
 import { Skeleton } from '@/components/ui/skeleton'
+import { getArticlesByQuery } from '@/lib/query/getArticlesByQuery'
 import { MoveLeft, MoveRight } from 'lucide-react'
+import Link from 'next/link'
 import React, { Suspense } from 'react'
 
 type searchPageProps = {
-  searchParams: Promise<{search?:string }>
+  searchParams: Promise<{search?:string, page?:string }>
 }
+
+// pagination:
+const ITEMS_PER_PAGE=3;
 
 const page: React.FC<searchPageProps> = async ({searchParams}) => {
   const searchText = (await searchParams).search || "";
+  const currentPage = Number((await searchParams).page) || 1;
+
+  const skip = (currentPage-1)*ITEMS_PER_PAGE;
+  const take = ITEMS_PER_PAGE;
+
+  const {articles, totalCount} = await getArticlesByQuery(searchText,skip, take);
+
+  const totalPages = Math.ceil(totalCount/ITEMS_PER_PAGE);
+
+
 
   return (
     <main className='min-h-screen bg-background'>
@@ -29,19 +44,44 @@ const page: React.FC<searchPageProps> = async ({searchParams}) => {
 
             {/* Display all articles here: */}
             <Suspense fallback={<AllArticlesSectionSkeleton/>}>
-              <AllArticlesSection searchText={searchText}/>
+              <AllArticlesSection articles={articles}/>
             </Suspense>
 
 
             {/* Pagination  */}
             
-            <div className='mt-12 flex justify-center gap-2'>
-                <Button variant="ghost"> <MoveLeft size='sm'/> Prev</Button>
-                <Button variant="ghost">1</Button>
-                <Button variant="ghost">2</Button>
-                <Button variant="ghost">3</Button>
-                <Button variant="ghost">Next <MoveRight size='sm'/></Button>
+            <div className='mt-12 flex justify-center gap-2 border-t pt-10 border-gray-300 dark:bg-gray-700 mb-12'>
 
+                <Link href={`?search=${searchText}&page=${currentPage-1}`} passHref>
+                  <Button variant="ghost" disabled={currentPage==1}> 
+                    <MoveLeft size='sm'/> Prev
+                  </Button>
+                </Link>
+                
+                {
+                  Array.from({length: totalPages}).map((_, index) => (
+
+                    <Link 
+                    href={`?search=${searchText}&page=${index+1}`} 
+                    passHref 
+                    key={index}
+                    >
+
+                      <Button variant={`${currentPage===index+1 ? "destructive" : "ghost"}`}> 
+                        {index+1}
+                      </Button>
+
+                    </Link>
+
+                  ))
+                }
+
+
+                <Link href={`?search=${searchText}&page=${currentPage+1}`} passHref>
+                  <Button variant="ghost" disabled={currentPage==totalPages}>
+                    Next <MoveRight size='sm'/>
+                  </Button>
+                </Link>
             </div>
 
         </div>

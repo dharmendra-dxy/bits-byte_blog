@@ -28,9 +28,9 @@ const Navbar = () => {
             <Link href="/">
               <span className="font-bold text-2xl">
                 <span className="bg-gradient-to-r from-purple-600 to-indigo-600 dark:from-purple-400 dark:to-indigo-400 bg-clip-text text-transparent">
-                  Byte
+                  Bits
                 </span>
-                <span>Code</span>
+                <span>&Byte</span>
               </span>
             </Link>
           </div>

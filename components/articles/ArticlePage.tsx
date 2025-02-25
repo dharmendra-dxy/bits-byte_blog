@@ -73,10 +73,12 @@ const ArticlePage:React.FC<articlePageTypes> = async ({article}) => {
                     </h1>
 
                     <div className='flex items-center gap-4 w-full border-b border-gray-500 pb-4'>
-                        <Avatar className='bg-gray-200 dark:bg-gray-700 h-9 w-9 flex items-center justify-center cursor-pointer rounded-full'>
-                            <AvatarImage src={article.author.imageUrl || ""}/>
-                            <AvatarFallback>{article.author.name[0]}</AvatarFallback>
-                        </Avatar>
+                        <div className='bg-gray-200 dark:bg-gray-700 h-9 w-9 flex items-center justify-center cursor-pointer rounded-full overflow-hidden'>
+                            <Avatar >
+                                <AvatarImage src={article.author.imageUrl || ""}/>
+                                <AvatarFallback>{article.author.name[0]}</AvatarFallback>
+                            </Avatar>
+                        </div>
                         <div className='flex items-center justify-between w-full'>
                             <p className='font-medium text-gray-500 hover:text-gray-600 cursor-pointer'>
                                 {article.author.name}

@@ -6,14 +6,23 @@ import { AvatarFallback, AvatarImage } from '@radix-ui/react-avatar'
 import { getArticlesByQuery } from '@/lib/query/getArticlesByQuery'
 import NoArticleFound from './NoArticleFound'
 import Link from 'next/link'
+import { Prisma } from '@prisma/client'
 
 type AllArticlesSectionProps = {
-    searchText: string,
+    articles: Prisma.ArticlesGetPayload<{
+        include:{
+            author:{
+                select:{
+                    name: true,
+                    email: true,
+                    imageUrl: true,
+                }
+            }
+        }
+    }>[];
 }
 
-const AllArticlesSection:React.FC<AllArticlesSectionProps> = async ({searchText}) => {
-
-    const articles = await getArticlesByQuery(searchText);
+const AllArticlesSection:React.FC<AllArticlesSectionProps> = async ({articles}) => {
 
     if(articles.length<=0){
         return <NoArticleFound/>
