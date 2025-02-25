@@ -2,6 +2,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Mail } from "lucide-react";
 import { Linkedin, Github, Twitter } from "lucide-react";
+import Link from "next/link";
 
 export function Footer() {
   return (
@@ -22,15 +23,25 @@ export function Footer() {
             </p>
             
             <div className="mt-6 flex gap-2">
-              <Button variant="ghost" size="icon">
-                <Twitter className="h-5 w-5 text-muted-foreground" />
-              </Button>
-              <Button variant="ghost" size="icon">
-                <Github className="h-5 w-5 text-muted-foreground" />
-              </Button>
-              <Button variant="ghost" size="icon">
-                <Linkedin className="h-5 w-5 text-muted-foreground" />
-              </Button>
+              <a target="_blank" href='https://x.com/dharmendra_dxy?t=tyBsnxMapImcCLSM6TIDww&s=09'>
+                <Button variant="ghost" size="icon">
+                  <Twitter className="h-5 w-5 text-muted-foreground" />
+                </Button>
+              </a>
+
+              <a target="_blank" href='https://github.com/dharmendra-dxy'>
+                <Button variant="ghost" size="icon">
+                  <Github className="h-5 w-5 text-muted-foreground" />
+                </Button>
+              </a>
+              
+              <a target="_blank" href='https://www.linkedin.com/in/dharmendra-yadav-a2a5b7290'>  
+                <Button variant="ghost" size="icon">
+                  <Linkedin className="h-5 w-5 text-muted-foreground" />
+                </Button>
+              </a>
+              
+              
             </div>
           </div>
 
@@ -56,26 +67,7 @@ export function Footer() {
             </ul>
           </div>
 
-          {/* Newsletter */}
-          <div className="space-y-4 md:col-span-2 lg:col-span-2">
-            <h3 className="text-lg font-semibold text-foreground">Stay Updated</h3>
-            <form className="flex flex-col gap-4">
-              <div className="relative">
-                <Input 
-                  type="email" 
-                  placeholder="Enter your email"
-                  className="pl-10 pr-4 py-6"
-                />
-                <Mail className="h-5 w-5 text-muted-foreground absolute left-3 top-1/2 -translate-y-1/2" />
-              </div>
-              <Button 
-                type="submit" 
-                className="w-full"
-              >
-                Subscribe
-              </Button>
-            </form>
-          </div>
+          
         </div>
 
         {/* Copyright */}

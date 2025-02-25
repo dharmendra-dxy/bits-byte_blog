@@ -2,6 +2,7 @@ import React from 'react'
 import { Button } from '../ui/button'
 import { cn } from '@/lib/utils'
 import Image from 'next/image'
+import Link from 'next/link'
 
 const HeroSection = () => {
   return (
@@ -10,19 +11,23 @@ const HeroSection = () => {
 
             <div className='flex-1 space-y-8 text-center md:text-left '>
                 <h1 className='text-4xl font-bold tracking-tight sm:text-5xl md:text-6xl'>
-                    Explore the word 
+                    Explore the world 
                     through 
                     <span className='bg-gradient-to-r from-violet-400 to-indigo-400 bg-clip-text text-transparent'> 
                         {" "}Words
                     </span>
                 </h1>
                 <p className='text-lg md:text-xl text-gray-700 dark:text-gray-400'>
-                    Discpver insightful article, thought-provoking stroies, and experts perspective on technology, lifestyle and inovations.
+                    Discover insightful article, thought-provoking stories, and experts perspective on technology, lifestyle and inovations.
                 </p>
 
                 <div className='flex flex-col items-center gap-4 sm:flex-row md:justify-start'>
-                    <Button className='rounded-full'>Start Reading</Button>
-                    <Button className='rounded-full' variant='outline'>Explore Topics</Button>
+                    <Link href='/articles'>
+                        <Button className='rounded-full'>Start Reading</Button>
+                    </Link>
+                    <Link href='/articles'>
+                        <Button className='rounded-full' variant='outline'>Explore Topics</Button>
+                    </Link>
                 </div>
 
                 <div className='grid grid-cols-3 gap-4 pt-8 md:max-w-md'>
