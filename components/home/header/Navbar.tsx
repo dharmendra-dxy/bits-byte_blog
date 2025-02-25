@@ -5,8 +5,7 @@ import { Button } from "../../ui/button";
 import { ToggleMode } from "./ToggleMode";
 import SearchInput from "./SearchInput";
 import { useState } from "react";
-import { Menu, Search, X } from "lucide-react"
-import { Input } from "@/components/ui/input";
+import { Menu, X } from "lucide-react"
 import { SignedIn, SignedOut, SignInButton, SignUpButton, UserButton } from "@clerk/nextjs";
 
 const Navbar = () => {
